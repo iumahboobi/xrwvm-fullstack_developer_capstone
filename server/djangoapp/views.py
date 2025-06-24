@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import CarModel, CarMake
 from .populate import initiate
 from .restapis import get_request, analyze_review_sentiments, post_review
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # Get an instance of a logger
@@ -63,7 +64,7 @@ def registration(request):
         User.objects.get(username=username)
         username_exist = True
 
-    except requests.exceptions.RequestException as e:
+    except:
         # If not, simply log this is a new user
         logger.debug("{} is a new user".format(username))
 
